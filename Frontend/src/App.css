@@ -3,12 +3,17 @@
     font-family: Roboto, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
-body {
+body, html, #root {
     margin: 0;
     padding: 0;
+    height: 100%;
+    width: 100%;
+    overflow: hidden; /* Prevents unwanted scrollbars on the main page */
 }
 
 .app {
     background-color: #212121;
     display: flex;
+    width: 100vw;  /* Set width to 100% of the viewport width */
+    height: 100vh; /* Set height to 100% of the viewport height */
 }
