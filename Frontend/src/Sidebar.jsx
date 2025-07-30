@@ -8,10 +8,10 @@ function Sidebar() {
 
     const getAllThreads = async () => {
         try {
-            const response = await fetch("http://localhost:8080/api/thread");
+            // UPDATED URL
+            const response = await fetch("/api/thread");
             const res = await response.json();
             const filteredData = res.map(thread => ({threadId: thread.threadId, title: thread.title}));
-            //console.log(filteredData);
             setAllThreads(filteredData);
         } catch(err) {
             console.log(err);
@@ -35,7 +35,8 @@ function Sidebar() {
         setCurrThreadId(newThreadId);
 
         try {
-            const response = await fetch(`http://localhost:8080/api/thread/${newThreadId}`);
+            // UPDATED URL
+            const response = await fetch(`/api/thread/${newThreadId}`);
             const res = await response.json();
             console.log(res);
             setPrevChats(res);
@@ -48,7 +49,8 @@ function Sidebar() {
 
     const deleteThread = async (threadId) => {
         try {
-            const response = await fetch(`http://localhost:8080/api/thread/${threadId}`, {method: "DELETE"});
+            // UPDATED URL
+            const response = await fetch(`/api/thread/${threadId}`, {method: "DELETE"});
             const res = await response.json();
             console.log(res);
 
@@ -93,7 +95,7 @@ function Sidebar() {
             </ul>
  
             <div className="sign">
-                <p>By Samanyu Kaushal &hearts;</p>
+                <p>By Samanyu Kaushal</p>
             </div>
         </section>
     )
