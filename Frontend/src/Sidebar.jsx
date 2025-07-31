@@ -8,7 +8,6 @@ function Sidebar() {
 
     const getAllThreads = async () => {
         try {
-            // UPDATED URL
             const response = await fetch("/api/thread");
             const res = await response.json();
             const filteredData = res.map(thread => ({threadId: thread.threadId, title: thread.title}));
@@ -35,10 +34,8 @@ function Sidebar() {
         setCurrThreadId(newThreadId);
 
         try {
-            // UPDATED URL
             const response = await fetch(`/api/thread/${newThreadId}`);
             const res = await response.json();
-            console.log(res);
             setPrevChats(res);
             setNewChat(false);
             setReply(null);
@@ -49,12 +46,8 @@ function Sidebar() {
 
     const deleteThread = async (threadId) => {
         try {
-            // UPDATED URL
             const response = await fetch(`/api/thread/${threadId}`, {method: "DELETE"});
-            const res = await response.json();
-            console.log(res);
-
-            //updated threads re-render
+            await response.json();
             setAllThreads(prev => prev.filter(thread => thread.threadId !== threadId));
 
             if(threadId === currThreadId) {
@@ -69,7 +62,8 @@ function Sidebar() {
     return (
         <section className="sidebar">
             <button onClick={createNewChat}>
-                <img src="src/assets/blacklogo.png" alt="gpt logo" className="logo"></img>
+                {/* UPDATED IMAGE PATH */}
+                <img src="/blacklogo.png" alt="gpt logo" className="logo"></img>
                 <span><i className="fa-solid fa-pen-to-square"></i></span>
             </button>
 
@@ -78,14 +72,13 @@ function Sidebar() {
                 {
                     allThreads?.map((thread, idx) => (
                         <li key={idx} 
-                            // eslint-disable-next-line no-unused-vars
-                            onClick={(e) => changeThread(thread.threadId)}
-                            className={thread.threadId === currThreadId ? "highlighted": " "}
+                            onClick={() => changeThread(thread.threadId)}
+                            className={thread.threadId === currThreadId ? "highlighted": ""}
                         >
                             {thread.title}
                             <i className="fa-solid fa-trash"
                                 onClick={(e) => {
-                                    e.stopPropagation(); //stop event bubbling
+                                    e.stopPropagation();
                                     deleteThread(thread.threadId);
                                 }}
                             ></i>
