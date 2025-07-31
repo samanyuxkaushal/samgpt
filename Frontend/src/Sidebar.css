@@ -1,15 +1,14 @@
 .sidebar {
     background-color: #171717;
     color: #b4b4b4;
-    height: 100vh;
+    height: 100%; /* Changed from 100vh to work inside a flex container */
     width: 320px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    flex-shrink: 0; /* Prevents the sidebar from shrinking */
 }
 
-
-button {
+.sidebar button {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -29,28 +28,31 @@ button {
     object-fit: cover;
 }
 
-button span {
+.sidebar button span {
     font-size: 20px;
 }
 
-button:hover {
+.sidebar button:hover {
     background-color: rgba(180, 180, 180, 0.05);
 }
 
 .history {
     margin: 10px;
     padding: 10px;
-    height: 100%;
+    flex-grow: 1; /* Allows this section to take up available space */
+    overflow-y: auto; /* Adds a scrollbar if the list of chats is long */
 }
 
 .history li {
     list-style-type: none;
     cursor: pointer;
-    padding: 2px 5px;
+    padding: 10px 5px; /* Adjusted padding for better spacing */
     margin-bottom: 0.3rem;
     font-size: 14px;
-    border: solid 10px transparent;
     position: relative;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .history li:hover {
@@ -69,7 +71,10 @@ button:hover {
 .fa-trash {
     opacity: 0;
     position: absolute;
-    right: 0;
+    right: 5px; /* Adjusted position */
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 5px;
 }
 
 .history li:hover .fa-trash {

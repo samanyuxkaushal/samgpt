@@ -1,21 +1,20 @@
-.chatWindow {
+/* Main Layout Container */
+.chat-window {
     background-color: #212121;
-    height: 100vh;
+    height: 100%; /* Changed from 100vh to work inside a flex container */
     width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    text-align: center;
+    flex-grow: 1; /* Allows this element to take up all available space */
 }
 
-/* navbar */
-
+/* Navbar */
 .navbar {
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-shrink: 0; /* Prevent navbar from shrinking */
 }
 
 .navbar span {
@@ -24,6 +23,7 @@
 
 .userIconDiv {
     margin: 1rem 2rem;
+    position: relative; /* For dropdown positioning */
 }
 
 .userIcon {
@@ -37,13 +37,56 @@
     cursor: pointer;
 }
 
-/* chat input */
+/* Chat History Area */
+.main-chat {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 20px;
+    padding-bottom: 20px;
+}
+
+.main-chat h1 {
+    text-align: center;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* Chat Bubbles */
+.chats {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-width: 750px;
+    margin: 0 auto;
+}
+
+.userDiv, .gptDiv {
+    padding: 15px;
+    border-radius: 10px;
+    line-height: 1.6;
+}
+
+.userDiv {
+    background-color: transparent;
+    align-self: flex-start;
+    color: #ececec;
+}
+
+.gptDiv {
+    background-color: #2f2f2f;
+    align-self: flex-start;
+    width: 100%;
+}
+
+/* Chat Input Area */
 .chatInput {
     width: 100%;
+    padding: 1rem 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    flex-shrink: 0; /* Prevent input area from shrinking */
 }
 
 .inputBox {
@@ -51,11 +94,10 @@
     position: relative;
     max-width: 700px;
     display: flex;
-    justify-content: space-between;
     align-items: center;
 }
 
-input {
+.inputBox input {
     width: 100%;
     border: none;
     background-color: rgba(255, 255, 255, 0.05);
@@ -63,13 +105,13 @@ input {
     font-size: 0.8rem;
     border-radius: 14px;
     box-shadow: rgba(0, 0, 0, 0.05) 0 54px 55px,
-                rgba(0, 0, 0, 0.05) 0 -12px 30px,
-                rgba(0, 0, 0, 0.05) 0 4px 6px,
-                rgba(0, 0, 0, 0.05) 0 12px 3px,
-                rgba(0, 0, 0, 0.05) 0 -3px 5px;
+                 rgba(0, 0, 0, 0.05) 0 -12px 30px,
+                 rgba(0, 0, 0, 0.05) 0 4px 6px,
+                 rgba(0, 0, 0, 0.05) 0 12px 3px,
+                 rgba(0, 0, 0, 0.05) 0 -3px 5px;
 }
 
-input:focus {
+.inputBox input:focus {
     outline: none;
 }
 
@@ -95,14 +137,12 @@ input:focus {
     color: #b4b4b4;
 }
 
-/* dropdown css */
-
+/* Dropdown CSS */
 .dropDown {
     position: absolute;
-    top: 4rem;
-    right: 4rem;
+    top: 3rem; /* Adjusted position */
+    right: 0;
     width: 150px;
-
     background-color: #323232;
     padding: 0.3rem 0.5rem;
     border-radius: 6px;
@@ -117,7 +157,6 @@ input:focus {
     padding: 0.5rem 0.2rem;
     cursor: pointer;
 }
-
 
 .dropDownItem:hover {
     background-color: rgba(180, 180, 180, 0.1);
